@@ -4,7 +4,7 @@
     "version": "PTDL_v2",
     "update_url": "https://github.com/Furglitch/eggs/raw/refs/heads/main/Marinara-Engine/pterodactyl-marinara-engine.json"
   },
-  "exported_at": "2026-09-11T22:16:42.693Z",
+  "exported_at": "2026-09-11T22:19:14.123Z",
   "name": "Marinara Engine",
   "author": "furglitch.githubsecurity.clustered014@passmail.net",
   "description": "A local, AI-powered chat, roleplay, and game engine built around one idea: you install it, you run it, and it just works. Oh, and don't forget about the part where you have fun! ALSO, HEY, LOOK, IT'S FREE.",
@@ -18,7 +18,7 @@
     "files": "{}",
     "startup": "{\"done\":[\"Starting Marinara Engine on\"]}",
     "logs": "{}",
-    "stop": "SIGTERM"
+    "stop": "^C"
   },
   "scripts": {
     "installation": {
