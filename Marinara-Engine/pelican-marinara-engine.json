@@ -1,5 +1,9 @@
 {
   "uuid": "7a361b8b-05c5-4fb7-a870-67c9ee0f1da9",
+  "meta": {
+    "version": "PLCN_v3",
+    "update_url": "https://github.com/Furglitch/eggs/raw/refs/heads/main/Marinara-Engine/pelican-marinara-engine.json"
+  },
   "name": "Marinara Engine",
   "description": "A local, AI-powered chat, roleplay, and game engine built around one idea: you install it, you run it, and it just works. Oh, and don't forget about the part where you have fun! ALSO, HEY, LOOK, IT'S FREE.",
   "author": "furglitch.githubsecurity.clustered014@passmail.net",

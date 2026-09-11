@@ -1,0 +1,42 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY CALAGOPUS PANEL",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": "https://github.com/Furglitch/eggs/raw/refs/heads/main/SillyTavern/pelican-sillytavern.json"
+  },
+  "exported_at": "2026-09-11T21:40:26.121Z",
+  "name": "SillyTavern",
+  "author": "furglitch.githubsecurity.clustered014@passmail.net",
+  "description": "A free and open-source frontend for interacting with AI chat models",
+  "features": [],
+  "docker_images": {
+    "NodeJS 20": "ghcr.io/pterodactyl/yolks:nodejs_20"
+  },
+  "file_denylist": [],
+  "startup": "node server.js --port={{SERVER_PORT}} --listen=true",
+  "config": {
+    "files": "{}",
+    "startup": "{\"done\":[\"SillyTavern is listening on\"]}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\n\necho \"== [Calagopus Installer] -- Installing Dependencies ==\"\napt-get update -y\napt-get install -y curl git\n\necho \"== [Calagopus Installer] -- Configuring Working Directory ==\"\ncd /mnt/server\ngit config --global --add safe.directory /mnt/server\n\necho \"== [Calagopus Installer] -- Cloning Pasta-Devs/Marinara-Engine, ${VERSION:-main} branch ==\"\ngit clone -b \"${VERSION:-main}\" https://github.com/SillyTavern/SillyTavern.git .\n\necho \"== [Calagopus Installer] -- Installing Node Modules ==\"\nexport NODE_ENV=production\nnpm install --no-save --no-audit --no-fund --loglevel=error --no-progress --ignore-scripts\n\necho \"== [Calagopus Installer] -- Installation Complete ==\"",
+      "container": "ghcr.io/pelican-eggs/installers:debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Version",
+      "description": "Branch to pull from GitHub. Can be `release` or `staging`",
+      "env_variable": "VERSION",
+      "default_value": "release",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|alpha_dash|in:release,staging",
+      "field_type": "text"
+    }
+  ]
+}

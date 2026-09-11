@@ -1,10 +1,10 @@
 # SillyTavern
 
-[SillyTavern](https://sillytavern.app/) is a free and open-source frontend for interacting with AI chat models. It allows users to create and manage characters, customize prompts, and engage in conversations with AI models in a user-friendly interface.
+[SillyTavern](https://github.com/SillyTavern/SillyTavern) README Blurb:
+> SillyTavern provides a single unified interface for many LLM APIs [...], a mobile-friendly layout, Visual Novel Mode, Automatic1111 & ComfyUI API image generation integration, TTS, WorldInfo (lorebooks), customizable UI, auto-translate, more prompt options than you'd ever want or need, and endless growth potential via third-party extensions.
 
-## Supported Versions
+## Environment Variables
 
-Rather than versions, the SillyTavern egg supports two release channels, selectable in the 'version' environment variable:
-
-- release - latest stable release
-- staging - latest staging release
+| Key | Value | Default | Description |
+|-----|-------|---------|-------------|
+| VERSION | string: release, staging | release | GitHub Branch to clone from |
