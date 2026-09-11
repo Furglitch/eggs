@@ -4,7 +4,7 @@
     "version": "PTDL_v2",
     "update_url": "https://github.com/Furglitch/eggs/raw/refs/heads/main/Marinara-Engine/pterodactyl-marinara-engine.json"
   },
-  "exported_at": "2026-09-11T22:19:14.123Z",
+  "exported_at": "2026-09-11T22:20:51.034Z",
   "name": "Marinara Engine",
   "author": "furglitch.githubsecurity.clustered014@passmail.net",
   "description": "A local, AI-powered chat, roleplay, and game engine built around one idea: you install it, you run it, and it just works. Oh, and don't forget about the part where you have fun! ALSO, HEY, LOOK, IT'S FREE.",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "installation": {
-      "script": "#!/bin/bash\n\necho \"== [Calagopus Installer] -- Installing Dependencies ==\"\napt-get update -y\napt-get install -y curl git\n\necho \"== [Calagopus Installer] -- Configuring Working Directory ==\"\ncd /mnt/server\ngit config --global --add safe.directory /mnt/server\n\necho \"== [Calagopus Installer] -- Cloning Pasta-Devs/Marinara-Engine, ${VERSION:-main} branch ==\"\ngit clone -b \"${VERSION:-main}\" https://github.com/Pasta-Devs/Marinara-Engine.git .\n\necho \"== [Calagopus Installer] -- Generating Admin Secret ==\"\nADMIN_SECRET=$(openssl rand -base64 32)\necho \"!!! CRITICAL !!!\"\necho \"Admin secret below! Make sure to copy this to put it in your panel!\"\necho \"ADMIN_SECRET=$ADMIN_SECRET\"\necho \"ADMIN_SECRET=$ADMIN_SECRET\" >> ./.env\n\necho \"== [Calagopus Installer] -- Preparing Executable ==\"\nchmod +x start.sh\n\necho \"== [Calagopus Installer] -- Installation Complete ==\"\n",
+      "script": "#!/bin/bash\n\necho \"== [Calagopus Installer] -- Installing Dependencies ==\"\napt-get update -y\napt-get install -y curl git\n\necho \"== [Calagopus Installer] -- Configuring Working Directory ==\"\ncd /mnt/server\ngit config --global --add safe.directory /mnt/server\n\necho \"== [Calagopus Installer] -- Cloning Pasta-Devs/Marinara-Engine, ${VERSION:-main} branch ==\"\ngit clone -b \"${VERSION:-main}\" https://github.com/Pasta-Devs/Marinara-Engine.git .\n\necho \"== [Calagopus Installer] -- Generating Admin Secret ==\"\nADMIN_SECRET=$(openssl rand -base64 32)\necho \"!!! CRITICAL !!!\"\necho \"Admin secret below! Make sure to copy this to put it in your panel!\"\necho \"ADMIN_SECRET=$ADMIN_SECRET\"\necho \"ADMIN_SECRET=$ADMIN_SECRET\" >> ./.env\necho \"You can find this in your .env file later if you forget it.\"\n\necho \"== [Calagopus Installer] -- Preparing Executable ==\"\nchmod +x start.sh\n\necho \"== [Calagopus Installer] -- Installation Complete ==\"\n",
       "container": "ghcr.io/pelican-eggs/installers:debian",
       "entrypoint": "/bin/bash"
     }
