@@ -57,16 +57,31 @@
     {
       "name": "Allowed IPs",
       "name_translations": {},
-      "description": "List of IPs that are allowed to access the server. Optionally, use this alongside the BASIC_AUTH_* variables.",
+      "description": "List of IPs that are allowed to access the server. Comma separated list.",
       "description_translations": {},
       "order": 2,
       "env_variable": "IP_ALLOWLIST",
       "default_value": null,
       "user_viewable": true,
       "user_editable": true,
-      "secret": true,
+      "secret": false,
       "rules": [
-        "ipv4"
+        "regex:/^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\\s*,\\s*((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$/"
+      ]
+    },
+    {
+      "name": "Trusted Hosts",
+      "name_translations": {},
+      "description": "Authorized external IPs or domains where the user can access the server from. Comma separated list.",
+      "description_translations": {},
+      "order": 3,
+      "env_variable": "TRUSTED_HOSTS",
+      "default_value": null,
+      "user_viewable": true,
+      "user_editable": true,
+      "secret": false,
+      "rules": [
+        "string"
       ]
     },
     {
@@ -74,7 +89,7 @@
       "name_translations": {},
       "description": "Username for Basic Auth login. Make sure to set the password. Optionally, use this alongside IP_ALLOWLIST",
       "description_translations": {},
-      "order": 3,
+      "order": 4,
       "env_variable": "BASIC_AUTH_USER",
       "default_value": null,
       "user_viewable": true,
@@ -89,7 +104,7 @@
       "name_translations": {},
       "description": "Password for Basic Auth login. Make sure to set the username.",
       "description_translations": {},
-      "order": 4,
+      "order": 5,
       "env_variable": "BASIC_AUTH_PASS",
       "default_value": null,
       "user_viewable": true,
@@ -104,7 +119,7 @@
       "name_translations": {},
       "description": "Third-party Personal Extension imports. \nThis is only the first gate; users must also opt in under Settings > Advanced > Danger Zone. \nProfessor Mari drafts do not require this flag.",
       "description_translations": {},
-      "order": 5,
+      "order": 6,
       "env_variable": "ENABLE_EXTERNAL_EXTENSIONS",
       "default_value": "false",
       "user_viewable": true,
@@ -120,7 +135,7 @@
       "name_translations": {},
       "description": "Branch to pull from GitHub. Can be `main` or `staging`",
       "description_translations": {},
-      "order": 6,
+      "order": 7,
       "env_variable": "VERSION",
       "default_value": "main",
       "user_viewable": true,
@@ -138,7 +153,7 @@
       "name_translations": {},
       "description": null,
       "description_translations": {},
-      "order": 7,
+      "order": 8,
       "env_variable": "AUTO_OPEN_BROWSER",
       "default_value": "false",
       "user_viewable": false,
