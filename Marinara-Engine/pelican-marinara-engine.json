@@ -1,0 +1,149 @@
+{
+  "uuid": "7a361b8b-05c5-4fb7-a870-67c9ee0f1da9",
+  "name": "Marinara Engine",
+  "description": "A local, AI-powered chat, roleplay, and game engine built around one idea: you install it, you run it, and it just works. Oh, and don't forget about the part where you have fun! ALSO, HEY, LOOK, IT'S FREE.",
+  "author": "furglitch.githubsecurity.clustered014@passmail.net",
+  "config": {
+    "files": {},
+    "startup": {
+      "done": [
+        "Starting Marinara Engine on"
+      ],
+      "strip_ansi": false
+    },
+    "stop": {
+      "type": "signal",
+      "value": "SIGTERM"
+    }
+  },
+  "scripts": {
+    "installation": {
+      "container": "ghcr.io/pelican-eggs/installers:debian",
+      "entrypoint": "/bin/bash",
+      "content": "#!/bin/bash\n\necho \"== [Calagopus Installer] -- Installing Dependencies ==\"\napt-get update -y\napt-get install -y curl git\n\necho \"== [Calagopus Installer] -- Configuring Working Directory ==\"\ncd /mnt/server\ngit config --global --add safe.directory /mnt/server\n\necho \"== [Calagopus Installer] -- Cloning Pasta-Devs/Marinara-Engine, ${VERSION:-main} branch ==\"\ngit clone -b \"${VERSION:-main}\" https://github.com/Pasta-Devs/Marinara-Engine.git .\n\necho \"== [Calagopus Installer] -- Preparing Executable ==\"\nchmod +x start.sh\n\necho \"== [Calagopus Installer] -- Installation Complete ==\"\n"
+    }
+  },
+  "startup_commands": {
+    "Default": "PORT=${SERVER_PORT} ./start.sh"
+  },
+  "force_outgoing_ip": false,
+  "separate_port": false,
+  "features": [],
+  "docker_images": {
+    "Default": "ghcr.io/pelican-eggs/yolks:nodejs_24"
+  },
+  "file_denylist": [],
+  "variables": [
+    {
+      "name": "Automatic Updates",
+      "name_translations": {},
+      "description": "Enables Marinara Engine pulling its own updates",
+      "description_translations": {},
+      "order": 1,
+      "env_variable": "AUTO_UPDATE_ENABLED",
+      "default_value": "true",
+      "user_viewable": true,
+      "user_editable": true,
+      "secret": false,
+      "rules": [
+        "boolean",
+        "required"
+      ]
+    },
+    {
+      "name": "Allowed IPs",
+      "name_translations": {},
+      "description": "List of IPs that are allowed to access the server. Optionally, use this alongside the BASIC_AUTH_* variables.",
+      "description_translations": {},
+      "order": 2,
+      "env_variable": "IP_ALLOWLIST",
+      "default_value": null,
+      "user_viewable": true,
+      "user_editable": true,
+      "secret": true,
+      "rules": [
+        "ipv4"
+      ]
+    },
+    {
+      "name": "Basic Auth Userrname",
+      "name_translations": {},
+      "description": "Username for Basic Auth login. Make sure to set the password. Optionally, use this alongside IP_ALLOWLIST",
+      "description_translations": {},
+      "order": 3,
+      "env_variable": "BASIC_AUTH_USER",
+      "default_value": null,
+      "user_viewable": true,
+      "user_editable": true,
+      "secret": false,
+      "rules": [
+        "string"
+      ]
+    },
+    {
+      "name": "Basic Auth Password",
+      "name_translations": {},
+      "description": "Password for Basic Auth login. Make sure to set the username.",
+      "description_translations": {},
+      "order": 4,
+      "env_variable": "BASIC_AUTH_PASS",
+      "default_value": null,
+      "user_viewable": true,
+      "user_editable": true,
+      "secret": true,
+      "rules": [
+        "string"
+      ]
+    },
+    {
+      "name": "Enable Third-Party Extensions",
+      "name_translations": {},
+      "description": "Third-party Personal Extension imports. \nThis is only the first gate; users must also opt in under Settings > Advanced > Danger Zone. \nProfessor Mari drafts do not require this flag.",
+      "description_translations": {},
+      "order": 5,
+      "env_variable": "ENABLE_EXTERNAL_EXTENSIONS",
+      "default_value": "false",
+      "user_viewable": true,
+      "user_editable": true,
+      "secret": false,
+      "rules": [
+        "boolean",
+        "required"
+      ]
+    },
+    {
+      "name": "Version",
+      "name_translations": {},
+      "description": "Branch to pull from GitHub. Can be `main` or `staging`",
+      "description_translations": {},
+      "order": 6,
+      "env_variable": "VERSION",
+      "default_value": "main",
+      "user_viewable": true,
+      "user_editable": true,
+      "secret": false,
+      "rules": [
+        "in:main,staging",
+        "string",
+        "required",
+        "alpha_dash"
+      ]
+    },
+    {
+      "name": "Launch Browser on Startup",
+      "name_translations": {},
+      "description": null,
+      "description_translations": {},
+      "order": 7,
+      "env_variable": "AUTO_OPEN_BROWSER",
+      "default_value": "false",
+      "user_viewable": false,
+      "user_editable": false,
+      "secret": false,
+      "rules": [
+        "boolean",
+        "required"
+      ]
+    }
+  ]
+}

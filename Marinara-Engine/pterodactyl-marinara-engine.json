@@ -1,0 +1,102 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY CALAGOPUS PANEL",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-09-11T21:29:38.742Z",
+  "name": "Marinara Engine",
+  "author": "furglitch.githubsecurity.clustered014@passmail.net",
+  "description": "A local, AI-powered chat, roleplay, and game engine built around one idea: you install it, you run it, and it just works. Oh, and don't forget about the part where you have fun! ALSO, HEY, LOOK, IT'S FREE.",
+  "features": [],
+  "docker_images": {
+    "Default": "ghcr.io/pelican-eggs/yolks:nodejs_24"
+  },
+  "file_denylist": [],
+  "startup": "PORT=${SERVER_PORT} ./start.sh",
+  "config": {
+    "files": "{}",
+    "startup": "{\"done\":[\"Starting Marinara Engine on\"]}",
+    "logs": "{}",
+    "stop": "SIGTERM"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\n\necho \"== [Calagopus Installer] -- Installing Dependencies ==\"\napt-get update -y\napt-get install -y curl git\n\necho \"== [Calagopus Installer] -- Configuring Working Directory ==\"\ncd /mnt/server\ngit config --global --add safe.directory /mnt/server\n\necho \"== [Calagopus Installer] -- Cloning Pasta-Devs/Marinara-Engine, ${VERSION:-main} branch ==\"\ngit clone -b \"${VERSION:-main}\" https://github.com/Pasta-Devs/Marinara-Engine.git .\n\necho \"== [Calagopus Installer] -- Preparing Executable ==\"\nchmod +x start.sh\n\necho \"== [Calagopus Installer] -- Installation Complete ==\"\n",
+      "container": "ghcr.io/pelican-eggs/installers:debian",
+      "entrypoint": "/bin/bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Automatic Updates",
+      "description": "Enables Marinara Engine pulling its own updates",
+      "env_variable": "AUTO_UPDATE_ENABLED",
+      "default_value": "true",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "boolean|required",
+      "field_type": "text"
+    },
+    {
+      "name": "Allowed IPs",
+      "description": "List of IPs that are allowed to access the server. Optionally, use this alongside the BASIC_AUTH_* variables.",
+      "env_variable": "IP_ALLOWLIST",
+      "default_value": null,
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "ipv4",
+      "field_type": "text"
+    },
+    {
+      "name": "Basic Auth Userrname",
+      "description": "Username for Basic Auth login. Make sure to set the password. Optionally, use this alongside IP_ALLOWLIST",
+      "env_variable": "BASIC_AUTH_USER",
+      "default_value": null,
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "string",
+      "field_type": "text"
+    },
+    {
+      "name": "Basic Auth Password",
+      "description": "Password for Basic Auth login. Make sure to set the username.",
+      "env_variable": "BASIC_AUTH_PASS",
+      "default_value": null,
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "string",
+      "field_type": "text"
+    },
+    {
+      "name": "Enable Third-Party Extensions",
+      "description": "Third-party Personal Extension imports. \nThis is only the first gate; users must also opt in under Settings > Advanced > Danger Zone. \nProfessor Mari drafts do not require this flag.",
+      "env_variable": "ENABLE_EXTERNAL_EXTENSIONS",
+      "default_value": "false",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "boolean|required",
+      "field_type": "text"
+    },
+    {
+      "name": "Version",
+      "description": "Branch to pull from GitHub. Can be `main` or `staging`",
+      "env_variable": "VERSION",
+      "default_value": "main",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "in:main,staging|string|required|alpha_dash",
+      "field_type": "text"
+    },
+    {
+      "name": "Launch Browser on Startup",
+      "description": null,
+      "env_variable": "AUTO_OPEN_BROWSER",
+      "default_value": "false",
+      "user_viewable": false,
+      "user_editable": false,
+      "rules": "boolean|required",
+      "field_type": "text"
+    }
+  ]
+}
