@@ -41,7 +41,7 @@
     {
       "name": "Automatic Updates",
       "name_translations": {},
-      "description": "Enables Marinara Engine pulling its own updates",
+      "description": "Git-based Windows, macOS/Linux, and Termux launchers update the Engine by default. Set false to keep the installed Engine version. The launcher still prints a reminder when a newer published release is available, and manual update controls remain available.",
       "description_translations": {},
       "order": 1,
       "env_variable": "AUTO_UPDATE_ENABLED",
@@ -57,7 +57,7 @@
     {
       "name": "Allowed IPs",
       "name_translations": {},
-      "description": "List of IPs that are allowed to access the server. Comma separated list.",
+      "description": "IP Allowlist — comma-separated IPs or CIDRs (e.g. 192.168.1.100,10.0.0.0/24)\nWhen set, all other IPs are blocked. Loopback (127.0.0.1/::1) is always allowed.",
       "description_translations": {},
       "order": 2,
       "env_variable": "IP_ALLOWLIST",
@@ -72,7 +72,7 @@
     {
       "name": "Trusted Hosts",
       "name_translations": {},
-      "description": "Authorized external IPs or domains where the user can access the server from. Comma separated list.",
+      "description": "Public/reverse-proxy hostnames accepted by the HTTP Host check. IP addresses, localhost, .local/.home.arpa names, and single-label LAN/container names work automatically. Comma-separated; ports are ignored.",
       "description_translations": {},
       "order": 3,
       "env_variable": "TRUSTED_HOSTS",
@@ -85,11 +85,26 @@
       ]
     },
     {
-      "name": "Basic Auth Userrname",
+      "name": "Trusted Origins",
       "name_translations": {},
-      "description": "Username for Basic Auth login. Make sure to set the password. Optionally, use this alongside IP_ALLOWLIST",
+      "description": "Add an entry here ONLY for origins the auto-trust does not cover:\n  - A public IP/hostname (e.g. http://203.0.113.10:7831)\n  - A reverse-proxy domain (e.g. https://chat.example.com)\n  - A Tailscale MagicDNS hostname (e.g. http://my-box.tailnet.ts.net:7860)\nComma-separated. Set to * only if you intentionally trust every browser origin that can reach this server.\n",
       "description_translations": {},
       "order": 4,
+      "env_variable": "CSRF_TRUSTED_ORIGINS",
+      "default_value": null,
+      "user_viewable": true,
+      "user_editable": true,
+      "secret": false,
+      "rules": [
+        "string"
+      ]
+    },
+    {
+      "name": "Basic Auth Userrname",
+      "name_translations": {},
+      "description": "HTTP Basic Auth — set both BASIC_AUTH_USER and BASIC_AUTH_PASS to require a username/password on every request from non-loopback, non-allowlisted IPs.\nUse a strong, random password and pair with HTTPS (SSL_CERT/SSL_KEY) when exposing the server to the internet.",
+      "description_translations": {},
+      "order": 5,
       "env_variable": "BASIC_AUTH_USER",
       "default_value": null,
       "user_viewable": true,
@@ -102,9 +117,9 @@
     {
       "name": "Basic Auth Password",
       "name_translations": {},
-      "description": "Password for Basic Auth login. Make sure to set the username.",
+      "description": "HTTP Basic Auth — set both BASIC_AUTH_USER and BASIC_AUTH_PASS to require a username/password on every request from non-loopback, non-allowlisted IPs.\nUse a strong, random password and pair with HTTPS (SSL_CERT/SSL_KEY) when exposing the server to the internet.",
       "description_translations": {},
-      "order": 5,
+      "order": 6,
       "env_variable": "BASIC_AUTH_PASS",
       "default_value": null,
       "user_viewable": true,
@@ -119,7 +134,7 @@
       "name_translations": {},
       "description": "Third-party Personal Extension imports. \nThis is only the first gate; users must also opt in under Settings > Advanced > Danger Zone. \nProfessor Mari drafts do not require this flag.",
       "description_translations": {},
-      "order": 6,
+      "order": 7,
       "env_variable": "ENABLE_EXTERNAL_EXTENSIONS",
       "default_value": "false",
       "user_viewable": true,
@@ -135,7 +150,7 @@
       "name_translations": {},
       "description": "Branch to pull from GitHub. Can be `main` or `staging`",
       "description_translations": {},
-      "order": 7,
+      "order": 8,
       "env_variable": "VERSION",
       "default_value": "main",
       "user_viewable": true,
@@ -151,9 +166,9 @@
     {
       "name": "Launch Browser on Startup",
       "name_translations": {},
-      "description": null,
+      "description": "Shell launchers open the local URL by default. Set false to disable.\n! Egg firmly locked to false to prevent resource hogging.",
       "description_translations": {},
-      "order": 8,
+      "order": 9,
       "env_variable": "AUTO_OPEN_BROWSER",
       "default_value": "false",
       "user_viewable": false,
